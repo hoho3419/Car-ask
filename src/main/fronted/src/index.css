@@ -1,3 +1,44 @@
-body{
+body {
   margin: 0;
+  position: relative;
+}
+
+@media screen and (max-width: 2000px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  html,
+  body {
+    font-size: 12px;
+  }
+}
+
+a,
+p,
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: #000;
+}
+
+@font-face {
+  font-family: "ONE_Mobile_Bold";
+  src: url("/public/font/ONE\ Mobile\ Regular/ONE Mobile OTF Bold.otf");
+}
+
+@font-face {
+  font-family: "ONE_Mobile_Regular";
+  src: url("/public/font/ONE\ Mobile\ Regular/ONE Mobile OTF Regular.otf");
+}
+
+@font-face {
+  font-family: "ONE_Mobile_light";
+  src: url("/public/font/ONE\ Mobile\ Regular/ONE Mobile OTF Light.otf");
 }

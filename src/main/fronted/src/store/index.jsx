@@ -1,5 +1,5 @@
 import { useState, createContext } from "react";
-export const MailInfo = createContext(null);
+export const MailInfoContext = createContext(null);
 
 const Mail = ({ children }) => {
   const [identity, setIdentity] = useState(""); // 신분 (개인,사업자,법인)
@@ -7,13 +7,12 @@ const Mail = ({ children }) => {
   const [phoneNumber, setPhoneNumber] = useState(""); // 번호
   const [brand, setBrand] = useState(""); // 브랜드
   const [modelName, setModelName] = useState(""); // 모델명
-  const [initialCost, setInitialCost] = useState(0); // 초기비용
-  const [advancePayment, setAdvancePayment] = useState(0); // 선납금
+  const [deposit, setDeposit] = useState(""); // 보증금
+  const [initialCost, setInitialCost] = useState(""); // 선수금
   const [contactTime, setContactTime] = useState(""); // 연락가능시간
-  const [questions, setQuestions] = useState("");
-
+  const [questions, setQuestions] = useState(""); // 건의사항
   return (
-    <MailInfo.Provider
+    <MailInfoContext.Provider
       value={{
         identity,
         setIdentity,
@@ -25,10 +24,10 @@ const Mail = ({ children }) => {
         setBrand,
         modelName,
         setModelName,
+        deposit,
+        setDeposit,
         initialCost,
         setInitialCost,
-        advancePayment,
-        setAdvancePayment,
         contactTime,
         setContactTime,
         questions,
@@ -36,7 +35,7 @@ const Mail = ({ children }) => {
       }}
     >
       {children}
-    </MailInfo.Provider>
+    </MailInfoContext.Provider>
   );
 };
 
