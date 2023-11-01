@@ -30,15 +30,42 @@ h4 {
 
 @font-face {
   font-family: "ONE_Mobile_Bold";
-  src: url("/public/font/ONE\ Mobile\ Regular/ONE Mobile OTF Bold.otf");
+  src: url("/font/ONE Mobile OTF Bold.otf");
 }
 
 @font-face {
   font-family: "ONE_Mobile_Regular";
-  src: url("/public/font/ONE\ Mobile\ Regular/ONE Mobile OTF Regular.otf");
+  src: url("/font/ONE Mobile OTF Regular.otf");
 }
 
 @font-face {
-  font-family: "ONE_Mobile_light";
-  src: url("/public/font/ONE\ Mobile\ Regular/ONE Mobile OTF Light.otf");
+  font-family: "GmarketSansTTFBold";
+  src: url("/font/GmarketSansTTFBold.ttf");
+}
+
+@font-face {
+  font-family: "GmarketSansTTFMedium";
+  src: url("/font/GmarketSansTTFMedium.ttf");
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes page_slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

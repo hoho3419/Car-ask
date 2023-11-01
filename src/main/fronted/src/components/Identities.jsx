@@ -4,13 +4,17 @@ import styled from "@emotion/styled";
 import BottomBar from "./BottomBar";
 
 const Identities = ({ mainColor }) => {
-  const { identity, setIdentity } = useContext(MailInfoContext);
+  const { setSequence, identity, setIdentity } = useContext(MailInfoContext);
 
   const handleOptionChange = (event) => {
     setIdentity(event.target.value);
   };
 
   const isButtonDisabled = !identity;
+
+  const nextPageHandler = () => {
+    setSequence("2");
+  };
 
   return (
     <>
@@ -68,11 +72,17 @@ const Identities = ({ mainColor }) => {
         <Btn
           disabled={isButtonDisabled}
           style={{ background: isButtonDisabled ? "#99a2ac" : mainColor }}
+          onClick={nextPageHandler}
         >
           선택
         </Btn>
       </IdenContainer>
-      <BottomBar />
+      <BottomBar onNext={isButtonDisabled ? null : nextPageHandler}>
+        <img src="/lee/005.png" alt="아이콘" style={{ width: "5rem" }} />
+        <span>이름</span>
+        <span>/</span>
+        <span>연락처</span>
+      </BottomBar>
     </>
   );
 };
@@ -95,6 +105,7 @@ const IdenContainer = styled.div`
     padding: 1rem 0;
     margin: 1rem 0 1rem 0;
   }
+  animation: page_slide-down 0.5s ease-out forwards;
 `;
 
 const SelectBox = styled.div`
@@ -116,9 +127,8 @@ const Label = styled.label`
   background: #f8f8f8;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.08);
   color: #000;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-style: normal;
-  font-weight: 400;
   line-height: normal;
   text-align: center;
   outline: solid 1px #f8f8f8;
@@ -139,7 +149,6 @@ export const Btn = styled.button`
   margin: 3rem auto;
   padding: 1.5rem 4rem;
   font-size: 1.6rem;
-  font-weight: 900;
   background-color: #99a2ac;
   color: #fff;
   border-radius: 1rem;

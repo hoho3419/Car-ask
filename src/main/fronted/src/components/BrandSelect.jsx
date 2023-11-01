@@ -3,16 +3,25 @@ import styled from "@emotion/styled";
 import { InfoBox, InputBox, Title } from "./UserInfo";
 import { MailInfoContext } from "../store";
 import { Btn } from "./Identities";
+import BottomBar from "./BottomBar";
 
 const BrandSelect = ({ mainColor }) => {
-  const { brand, setBrand, modelName, setModelName } =
+  const { setSequence, brand, setBrand, modelName, setModelName } =
     useContext(MailInfoContext);
 
   const isButtonDisabled = !brand || !modelName;
 
+  const prePageHandler = () => {
+    setSequence("2");
+  };
+
+  const nextPageHandler = () => {
+    setSequence("4");
+  };
+
   return (
     <>
-      <TopBar />
+      <TopBar onPrev={prePageHandler} />
       <BrandContainer>
         <Title>
           <h2>
@@ -50,10 +59,18 @@ const BrandSelect = ({ mainColor }) => {
             />
           </InputBox>
         </InfoBox>
-        <Btn style={{ background: isButtonDisabled ? "#99a2ac" : mainColor }}>
+        <Btn
+          disabled={isButtonDisabled}
+          style={{ background: isButtonDisabled ? "#99a2ac" : mainColor }}
+          onClick={nextPageHandler}
+        >
           다음
         </Btn>
       </BrandContainer>
+      <BottomBar onNext={isButtonDisabled ? null : nextPageHandler}>
+        <img src="/lee/008.png" alt="아이콘" style={{ width: "3.5rem" }} />
+        <span>초기 비용</span>
+      </BottomBar>
     </>
   );
 };
@@ -63,12 +80,13 @@ export default BrandSelect;
 const BrandContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2rem 2rem 4rem 2rem;
+  padding: 2rem 2rem 0rem 2rem;
+  animation: page_slide-down 0.5s ease-out forwards;
 `;
 
-const TopBar = () => {
+const TopBar = ({ onPrev }) => {
   return (
-    <TopContainer>
+    <TopContainer onClick={onPrev}>
       <Left>
         <img src="/lee/006.png" alt="아이콘" style={{ width: "4rem" }} />
         <span>이름</span>
@@ -81,12 +99,12 @@ const TopBar = () => {
 };
 
 const TopContainer = styled.div`
-  height: 8rem;
+  height: 6.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: rgba(236, 245, 255, 1);
-  margin: 9rem 2rem 2rem 2rem;
+  margin: 9rem 2rem 0rem 2rem;
   border-radius: 1rem;
   cursor: pointer;
 `;
@@ -98,6 +116,5 @@ const Left = styled.div`
   gap: 0.5rem;
   span {
     font-size: 1.6rem;
-    font-weight: 900;
   }
 `;

@@ -1,18 +1,16 @@
 import styled from "@emotion/styled";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TopBar from "./TopBar";
 import { Btn } from "./Identities";
 import { MailInfoContext } from "../store";
+import BottomBar from "./BottomBar";
 
 const UserInfo = ({ mainColor }) => {
-  const { name, setName, phoneNumber, setPhoneNumber } =
+  const { setSequence, name, setName, phoneNumber, setPhoneNumber } =
     useContext(MailInfoContext);
+  const [checked, setChecked] = useState(true);
 
-  const isButtonDisabled = !name || !phoneNumber;
-
-  const formatPhoneNumber = (phoneNumber) => {
-    return phoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
-  };
+  const isButtonDisabled = !name || !phoneNumber || !checked;
 
   useEffect(() => {
     let formattedPhoneNumber = "";
@@ -23,9 +21,20 @@ const UserInfo = ({ mainColor }) => {
     }
   }, [phoneNumber]);
 
+  const formatPhoneNumber = (phoneNumber) => {
+    return phoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+  };
+  const prePageHandler = () => {
+    setSequence("1");
+  };
+
+  const nextPageHandler = () => {
+    setSequence("3");
+  };
+
   return (
     <>
-      <TopBar />
+      <TopBar onPrev={prePageHandler} />
       <InfoContainer>
         <Title>
           <h2>
@@ -61,14 +70,28 @@ const UserInfo = ({ mainColor }) => {
           </InputBox>
         </InfoBox>
         <PrivacyBox>
-          <input type="checkbox" name="agree" id="agree" />
+          <input
+            type="checkbox"
+            name="agree"
+            id="agree"
+            checked={checked}
+            onChange={(e) => setChecked(e.target.value)}
+          />
           <label htmlFor="agree">개인정보 수집 및 이용 동의</label>
           <button>자세히 보기 〉</button>
         </PrivacyBox>
-        <Btn style={{ background: isButtonDisabled ? "#99a2ac" : mainColor }}>
+        <Btn
+          disabled={isButtonDisabled}
+          style={{ background: isButtonDisabled ? "#99a2ac" : mainColor }}
+          onClick={nextPageHandler}
+        >
           다음
         </Btn>
       </InfoContainer>
+      <BottomBar onNext={isButtonDisabled ? null : nextPageHandler}>
+        <img src="/lee/007.png" alt="아이콘" style={{ width: "4rem" }} />
+        <span>차량 선택</span>
+      </BottomBar>
     </>
   );
 };
@@ -78,7 +101,8 @@ export default UserInfo;
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2rem 2rem 4rem 2rem;
+  padding: 2rem 2rem 0rem 2rem;
+  animation: page_slide-down 0.5s ease-out forwards;
 `;
 export const Title = styled.div`
   display: flex;
@@ -91,8 +115,9 @@ export const Title = styled.div`
     margin-bottom: 1rem;
   }
   span {
+    font-family: ONE_Mobile_Regular;
     font-size: 1.5rem;
-    color: #222121;
+    color: #3f3f3f;
   }
 `;
 
@@ -110,28 +135,28 @@ export const InputBox = styled.div`
   padding: 1.5rem 2rem;
   border-radius: 10px;
   span {
-    font-size: 1.1rem;
-    color: #a39c9c;
-    font-weight: 900;
+    font-size: 1.2rem;
+    color: #565656;
+    font-family: ONE_Mobile_Regular;
   }
   input {
     border: none;
     outline: none;
     background-color: transparent;
-    font-size: 1.3rem;
-    font-weight: 700;
+    font-size: 1.4rem;
     text-align: left;
     padding: 0;
     margin-top: 0.4rem;
+    font-family: ONE_Mobile_Regular;
+    color: #000;
   }
   select {
     background-color: transparent;
     border: none;
     outline: none;
-    font-size: 1.3rem;
-    padding: 0;
+    font-size: 1.4rem;
     margin-top: 0.4rem;
-    font-weight: 500;
+    font-family: ONE_Mobile_Regular;
     transform: translateX(-5px);
   }
 `;

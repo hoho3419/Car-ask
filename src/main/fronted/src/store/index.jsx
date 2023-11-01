@@ -2,6 +2,7 @@ import { useState, createContext } from "react";
 export const MailInfoContext = createContext(null);
 
 const Mail = ({ children }) => {
+  const [sequence, setSequence] = useState("1");
   const [identity, setIdentity] = useState(""); // 신분 (개인,사업자,법인)
   const [name, setName] = useState(""); // 이름
   const [phoneNumber, setPhoneNumber] = useState(""); // 번호
@@ -14,6 +15,8 @@ const Mail = ({ children }) => {
   return (
     <MailInfoContext.Provider
       value={{
+        sequence,
+        setSequence,
         identity,
         setIdentity,
         name,

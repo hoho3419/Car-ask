@@ -1,15 +1,8 @@
 import styled from "@emotion/styled";
 import React from "react";
 
-const BottomBar = () => {
-  return (
-    <BtmBar>
-      <img src="/lee/005.png" alt="아이콘" style={{ width: "5rem" }} />
-      <span>이름</span>
-      <span>/</span>
-      <span>연락처</span>
-    </BtmBar>
-  );
+const BottomBar = ({ children, onNext }) => {
+  return <BtmBar onClick={onNext}>{children}</BtmBar>;
 };
 
 export default BottomBar;
@@ -19,7 +12,7 @@ const BtmBar = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 0.5rem;
-  height: 8rem;
+  height: 6.5rem;
   background: linear-gradient(
     to bottom,
     rgba(236, 245, 254, 1),
@@ -29,9 +22,9 @@ const BtmBar = styled.div`
   padding-left: 1rem;
   box-sizing: border-box;
   border-radius: 1rem;
-
   span {
     font-size: 1.5rem;
-    font-weight: 800;
   }
+  animation: page_slide-down 0.5s ease-out forwards;
+  cursor: pointer;
 `;

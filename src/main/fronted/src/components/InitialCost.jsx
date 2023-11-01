@@ -3,22 +3,37 @@ import styled from "@emotion/styled";
 import { Title } from "./UserInfo";
 import { MailInfoContext } from "../store";
 import { Btn } from "./Identities";
+import BottomBar from "./BottomBar";
 
 const InitialCost = ({ mainColor }) => {
-  const { deposit, setDeposit, initialCost, setInitialCost } =
+  const { setSequence, deposit, setDeposit, initialCost, setInitialCost } =
     useContext(MailInfoContext);
 
   const isButtonDisabled = !deposit || !initialCost;
 
-  const depositformat = deposit.replace(",", "");
-  const initialCostformat = initialCost.replace(",", "");
+  const depositFormat = (e) => {
+    const depositformat = e.target.value.replace(",", "");
+    const deformat = (+depositformat).toLocaleString("ko-KR");
+    console.log(deformat == "NaN");
+    setDeposit(deformat);
+  };
+  const initCostFormat = (e) => {
+    const initCostformat = e.target.value.replace(",", "");
+    const initCost = (+initCostformat).toLocaleString("ko-KR");
+    setInitialCost(initCost);
+  };
 
-  const deformat = (+depositformat).toLocaleString("ko-KR");
-  const informat = (+initialCostformat).toLocaleString("ko-KR");
+  const prePageHandler = () => {
+    setSequence("3");
+  };
+
+  const nextPageHandler = () => {
+    setSequence("5");
+  };
 
   return (
     <>
-      <TopBar />
+      <TopBar onPrev={prePageHandler} />
       <InitialContainer>
         <Title>
           <h2>
@@ -35,8 +50,8 @@ const InitialCost = ({ mainColor }) => {
                 type="text"
                 name="deposit"
                 id="deposit"
-                value={deformat}
-                onChange={(e) => setDeposit(e.target.value)}
+                value={deposit}
+                onChange={depositFormat}
               />
               만원
             </div>
@@ -48,17 +63,25 @@ const InitialCost = ({ mainColor }) => {
                 type="text"
                 name="initialCost"
                 id="initialCost"
-                value={informat}
-                onChange={(e) => setInitialCost(e.target.value)}
+                value={initialCost}
+                onChange={initCostFormat}
               />
               만원
             </div>
           </CostBox>
         </CostContainer>
-        <Btn style={{ background: isButtonDisabled ? "#99a2ac" : mainColor }}>
+        <Btn
+          disabled={isButtonDisabled}
+          style={{ background: isButtonDisabled ? "#99a2ac" : mainColor }}
+          onClick={nextPageHandler}
+        >
           다음
         </Btn>
       </InitialContainer>
+      <BottomBar onNext={isButtonDisabled ? null : nextPageHandler}>
+        <img src="/lee/009.png" alt="아이콘" style={{ width: "3.5rem" }} />
+        <span>상세 내용</span>
+      </BottomBar>
     </>
   );
 };
@@ -68,13 +91,13 @@ export default InitialCost;
 const InitialContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2rem 2rem 4rem 2rem;
+  padding: 2rem 2rem 0rem 2rem;
+  animation: page_slide-down 0.5s ease-out forwards;
 `;
 
 const CostContainer = styled.div`
   display: flex;
   justify-content: center;
-  /* gap: 0.8rem; */
   margin: 2rem 0;
 `;
 
@@ -90,7 +113,9 @@ const CostBox = styled.div`
   border-radius: 10px;
   font-size: 1.3rem;
   span {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    color: #565656;
+    font-family: ONE_Mobile_Regular;
   }
   input {
     border: none;
@@ -107,18 +132,21 @@ const CostBox = styled.div`
     gap: 20px;
     font-size: 1.5rem;
     vertical-align: middle;
+    color: #565656;
+    font-family: ONE_Mobile_Regular;
     input {
       width: 15rem;
       font-size: 4rem;
       box-sizing: border-box;
       vertical-align: bottom;
+      color: #565656;
     }
   }
 `;
 
-const TopBar = () => {
+const TopBar = ({ onPrev }) => {
   return (
-    <TopContainer>
+    <TopContainer onClick={onPrev}>
       <Left>
         <img src="/lee/007.png" alt="아이콘" style={{ width: "6rem" }} />
         <span>차량 선택</span>
@@ -129,12 +157,12 @@ const TopBar = () => {
 };
 
 const TopContainer = styled.div`
-  height: 8rem;
+  height: 6.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: rgba(236, 245, 255, 1);
-  margin: 9rem 2rem 2rem 2rem;
+  margin: 9rem 2rem 0rem 2rem;
   border-radius: 1rem;
   cursor: pointer;
 `;
@@ -146,6 +174,5 @@ const Left = styled.div`
   gap: 0.5rem;
   span {
     font-size: 1.6rem;
-    font-weight: 900;
   }
 `;
