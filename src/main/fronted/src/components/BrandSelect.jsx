@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 import { InfoBox, InputBox, Title } from "./UserInfo";
 import { MailInfoContext } from "../store";
 import { Btn } from "./Identities";
-import BottomBar from "./BottomBar";
+import BottomBar from "./UI/BottomBar";
+import TopBar from "./UI/TopBar";
 
 const BrandSelect = ({ mainColor }) => {
   const { setSequence, brand, setBrand, modelName, setModelName } =
@@ -21,7 +22,15 @@ const BrandSelect = ({ mainColor }) => {
 
   return (
     <>
-      <TopBar onPrev={prePageHandler} />
+      <TopBar onPrev={prePageHandler}>
+        <Left>
+          <img src="/lee/006.png" alt="아이콘" style={{ width: "4rem" }} />
+          <span>이름</span>
+          <span>/</span>
+          <span>연락처 선택</span>
+        </Left>
+        <img src="/lee/010.png" alt="아이콘" style={{ width: "5rem" }} />
+      </TopBar>
       <BrandContainer>
         <Title>
           <h2>
@@ -45,6 +54,8 @@ const BrandSelect = ({ mainColor }) => {
               </option>
               <option value="밴츠">밴츠</option>
               <option value="BMW">BMW</option>
+              <option value="아우디">아우디</option>
+              <option value="포르쉐">포르쉐</option>
             </select>
           </InputBox>
           <InputBox>
@@ -82,31 +93,6 @@ const BrandContainer = styled.div`
   flex-direction: column;
   padding: 2rem 2rem 0rem 2rem;
   animation: page_slide-down 0.5s ease-out forwards;
-`;
-
-const TopBar = ({ onPrev }) => {
-  return (
-    <TopContainer onClick={onPrev}>
-      <Left>
-        <img src="/lee/006.png" alt="아이콘" style={{ width: "4rem" }} />
-        <span>이름</span>
-        <span>/</span>
-        <span>연락처 선택</span>
-      </Left>
-      <img src="/lee/010.png" alt="아이콘" style={{ width: "5rem" }} />
-    </TopContainer>
-  );
-};
-
-const TopContainer = styled.div`
-  height: 6.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgba(236, 245, 255, 1);
-  margin: 9rem 2rem 0rem 2rem;
-  border-radius: 1rem;
-  cursor: pointer;
 `;
 
 const Left = styled.div`

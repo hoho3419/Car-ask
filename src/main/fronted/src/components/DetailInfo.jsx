@@ -3,10 +3,24 @@ import styled from "@emotion/styled";
 import { Title } from "./UserInfo";
 import { MailInfoContext } from "../store";
 import { Btn } from "./Identities";
+import TopBar from "./UI/TopBar";
 
 const DetailInfo = ({ mainColor }) => {
-  const { setSequence, contactTime, setContactTime, questions, setQuestions } =
-    useContext(MailInfoContext);
+  const {
+    identity,
+    name,
+    phoneNumber,
+    brand,
+    modelName,
+    deposit,
+    initialCost,
+    contactTime,
+    questions,
+    setContactTime,
+    setSequence,
+    setQuestions,
+    setModalSucess,
+  } = useContext(MailInfoContext);
   const [startTime, setStartTime] = useState("");
   const [endTime, endSetTime] = useState("");
 
@@ -17,12 +31,22 @@ const DetailInfo = ({ mainColor }) => {
   };
   const submitHandler = () => {
     console.log("전송");
+    // const emailData = {
+
+    // }
+    setModalSucess(true);
     // setContactTime(`${startTime}~${endTime}`);
   };
 
   return (
     <>
-      <TopBar onPrev={prePageHandler} />
+      <TopBar onPrev={prePageHandler}>
+        <Left>
+          <img src="/lee/008.png" alt="아이콘" style={{ width: "5rem" }} />
+          <span>초기 비용 선택</span>
+        </Left>
+        <img src="/lee/010.png" alt="아이콘" style={{ width: "5rem" }} />
+      </TopBar>
       <DetailContainer>
         <Title>
           <h2>
@@ -127,29 +151,6 @@ const AskBox = styled.div`
     border-radius: 10px;
     font-size: 1.3rem;
   }
-`;
-
-const TopBar = ({ onPrev }) => {
-  return (
-    <TopContainer onClick={onPrev}>
-      <Left>
-        <img src="/lee/008.png" alt="아이콘" style={{ width: "5rem" }} />
-        <span>초기 비용 선택</span>
-      </Left>
-      <img src="/lee/010.png" alt="아이콘" style={{ width: "5rem" }} />
-    </TopContainer>
-  );
-};
-
-const TopContainer = styled.div`
-  height: 6.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgba(236, 245, 255, 1);
-  margin: 9rem 2rem 0rem 2rem;
-  border-radius: 1rem;
-  cursor: pointer;
 `;
 
 const Left = styled.div`

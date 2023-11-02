@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import Modal from "./Modal";
 import styled from "@emotion/styled";
+import { MailInfoContext } from "../../store";
 
 const Sucess = () => {
+  const { setModalSucess } = useContext(MailInfoContext);
+
+  const clearHandler = () => {
+    setModalSucess(false);
+  };
+
   return (
-    <Modal>
+    <Modal onClose={clearHandler}>
       <SucessBox>
         <h2>
           견적 신청이 <br />
@@ -15,7 +22,7 @@ const Sucess = () => {
           보내주신 조건을 꼼꼼히 검토하여
           <br /> 최고의 견적으로 연락드리겠습니다.
         </p>
-        <button>홈으로 이동</button>
+        <button onClick={clearHandler}>홈으로 이동</button>
       </SucessBox>
     </Modal>
   );
@@ -51,5 +58,6 @@ const SucessBox = styled.div`
     background-color: #0c4da2;
     color: #fff;
     font-family: GmarketSansTTFBold;
+    cursor: pointer;
   }
 `;

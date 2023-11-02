@@ -20,7 +20,7 @@ const header = css`
 `;
 
 function Home() {
-  const { sequence } = useContext(MailInfoContext);
+  const { sequence, modalSucess } = useContext(MailInfoContext);
   const mainColor = "#0c4da2";
   return (
     <>
@@ -32,7 +32,7 @@ function Home() {
         {sequence === "3" && <BrandSelect mainColor={mainColor} />}
         {sequence === "4" && <InitialCost mainColor={mainColor} />}
         {sequence === "5" && <DetailInfo mainColor={mainColor} />}
-        {/* <Sucess /> */}
+        {modalSucess && <Sucess />}
       </Container>
     </>
   );

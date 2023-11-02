@@ -18,7 +18,7 @@ const Modal = (props) => {
         document.getElementById("overlays")
       )}
       {ReactDom.createPortal(
-        <Backdrop onClick={props.onClick} />,
+        <Backdrop onClick={props.onClose} />,
         document.getElementById("overlays")
       )}
     </>
@@ -48,12 +48,4 @@ const modal = css`
   border-radius: 14px;
   z-index: 30;
   animation: slide-down 300ms ease-out forwards;
-`;
-
-const move = css`
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
 `;

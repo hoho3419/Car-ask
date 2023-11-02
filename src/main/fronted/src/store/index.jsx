@@ -12,6 +12,8 @@ const Mail = ({ children }) => {
   const [initialCost, setInitialCost] = useState(""); // 선수금
   const [contactTime, setContactTime] = useState(""); // 연락가능시간
   const [questions, setQuestions] = useState(""); // 건의사항
+  const [modalSucess, setModalSucess] = useState(false);
+
   return (
     <MailInfoContext.Provider
       value={{
@@ -35,6 +37,8 @@ const Mail = ({ children }) => {
         setContactTime,
         questions,
         setQuestions,
+        modalSucess,
+        setModalSucess,
       }}
     >
       {children}

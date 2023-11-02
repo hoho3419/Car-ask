@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 import { Title } from "./UserInfo";
 import { MailInfoContext } from "../store";
 import { Btn } from "./Identities";
-import BottomBar from "./BottomBar";
+import BottomBar from "./UI/BottomBar";
+import TopBar from "./UI/TopBar";
 
 const InitialCost = ({ mainColor }) => {
   const { setSequence, deposit, setDeposit, initialCost, setInitialCost } =
@@ -14,13 +15,13 @@ const InitialCost = ({ mainColor }) => {
   const depositFormat = (e) => {
     const depositformat = e.target.value.replace(",", "");
     const deformat = (+depositformat).toLocaleString("ko-KR");
-    console.log(deformat == "NaN");
-    setDeposit(deformat);
+    console.log(deformat === "NaN" ? "0" : deformat);
+    setDeposit(deformat === "NaN" ? "0" : deformat);
   };
   const initCostFormat = (e) => {
     const initCostformat = e.target.value.replace(",", "");
     const initCost = (+initCostformat).toLocaleString("ko-KR");
-    setInitialCost(initCost);
+    setInitialCost(initCost === "NaN" ? "0" : initCost);
   };
 
   const prePageHandler = () => {
@@ -33,7 +34,13 @@ const InitialCost = ({ mainColor }) => {
 
   return (
     <>
-      <TopBar onPrev={prePageHandler} />
+      <TopBar onPrev={prePageHandler}>
+        <Left>
+          <img src="/lee/007.png" alt="아이콘" style={{ width: "6rem" }} />
+          <span>차량 선택</span>
+        </Left>
+        <img src="/lee/010.png" alt="아이콘" style={{ width: "5rem" }} />
+      </TopBar>
       <InitialContainer>
         <Title>
           <h2>
@@ -142,29 +149,6 @@ const CostBox = styled.div`
       color: #565656;
     }
   }
-`;
-
-const TopBar = ({ onPrev }) => {
-  return (
-    <TopContainer onClick={onPrev}>
-      <Left>
-        <img src="/lee/007.png" alt="아이콘" style={{ width: "6rem" }} />
-        <span>차량 선택</span>
-      </Left>
-      <img src="/lee/010.png" alt="아이콘" style={{ width: "5rem" }} />
-    </TopContainer>
-  );
-};
-
-const TopContainer = styled.div`
-  height: 6.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgba(236, 245, 255, 1);
-  margin: 9rem 2rem 0rem 2rem;
-  border-radius: 1rem;
-  cursor: pointer;
 `;
 
 const Left = styled.div`

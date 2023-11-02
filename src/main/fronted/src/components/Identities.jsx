@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { MailInfoContext } from "../store";
 import styled from "@emotion/styled";
-import BottomBar from "./BottomBar";
+import BottomBar from "./UI/BottomBar";
 
 const Identities = ({ mainColor }) => {
   const { setSequence, identity, setIdentity } = useContext(MailInfoContext);
@@ -26,7 +26,10 @@ const Identities = ({ mainColor }) => {
         <p>해당되는 항목을 선택해주세요</p>
         <SelectBox>
           <Label
-            style={{ background: identity === "개인" ? mainColor : "#f8f8f8" }}
+            style={{
+              background: identity === "개인" ? mainColor : "#f8f8f8",
+              color: identity === "개인" ? "#fff" : "#000",
+            }}
           >
             <input
               type="radio"
@@ -41,6 +44,7 @@ const Identities = ({ mainColor }) => {
           <Label
             style={{
               background: identity === "개인사업자" ? mainColor : "#f8f8f8",
+              color: identity === "개인사업자" ? "#fff" : "#000",
             }}
           >
             <input
@@ -56,6 +60,7 @@ const Identities = ({ mainColor }) => {
           <Label
             style={{
               background: identity === "법인사업자" ? mainColor : "#f8f8f8",
+              color: identity === "법인사업자" ? "#fff" : "#000",
             }}
           >
             <input
@@ -124,21 +129,23 @@ const Label = styled.label`
   box-sizing: border-box;
   margin-top: 1rem;
   border-radius: 0.375rem;
-  background: #f8f8f8;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.08);
-  color: #000;
   font-size: 1.2rem;
-  font-style: normal;
-  line-height: normal;
   text-align: center;
   outline: solid 1px #f8f8f8;
   cursor: pointer;
+  /* background: #f8f8f8; */
+  /* color: #000; */
   transition: all 0.2s;
   input {
     display: none;
   }
   img {
     width: 8rem;
+  }
+  :hover {
+    background-color: #0c4da2 !important;
+    color: #f8f8f8 !important;
   }
 `;
 

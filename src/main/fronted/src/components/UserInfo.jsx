@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 import React, { useContext, useEffect, useState } from "react";
-import TopBar from "./TopBar";
+import TopBar from "./UI/TopBar";
 import { Btn } from "./Identities";
 import { MailInfoContext } from "../store";
-import BottomBar from "./BottomBar";
+import BottomBar from "./UI/BottomBar";
+import { Link } from "react-router-dom";
 
 const UserInfo = ({ mainColor }) => {
   const { setSequence, name, setName, phoneNumber, setPhoneNumber } =
@@ -31,10 +32,19 @@ const UserInfo = ({ mainColor }) => {
   const nextPageHandler = () => {
     setSequence("3");
   };
+  const toggleHandler = () => {
+    setChecked(!checked);
+  };
 
   return (
     <>
-      <TopBar onPrev={prePageHandler} />
+      <TopBar onPrev={prePageHandler}>
+        <Left>
+          <img src="/lee/011.png" alt="아이콘" style={{ width: "5rem" }} />
+          <span>구분 선택</span>
+        </Left>
+        <img src="/lee/010.png" alt="아이콘" style={{ width: "5rem" }} />
+      </TopBar>
       <InfoContainer>
         <Title>
           <h2>
@@ -75,10 +85,12 @@ const UserInfo = ({ mainColor }) => {
             name="agree"
             id="agree"
             checked={checked}
-            onChange={(e) => setChecked(e.target.value)}
+            onChange={toggleHandler}
           />
           <label htmlFor="agree">개인정보 수집 및 이용 동의</label>
-          <button>자세히 보기 〉</button>
+          <Link to={"/privacy"} target="_blank">
+            자세히 보기 〉
+          </Link>
         </PrivacyBox>
         <Btn
           disabled={isButtonDisabled}
@@ -104,6 +116,16 @@ const InfoContainer = styled.div`
   padding: 2rem 2rem 0rem 2rem;
   animation: page_slide-down 0.5s ease-out forwards;
 `;
+
+const Left = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    font-size: 1.6rem;
+  }
+`;
+
 export const Title = styled.div`
   display: flex;
   flex-direction: column;
@@ -176,7 +198,7 @@ const PrivacyBox = styled.div`
     cursor: pointer;
     user-select: none;
   }
-  button {
+  a {
     background-color: #fff;
     border: 1px solid #c2b8b8;
     padding: 0.9rem;
