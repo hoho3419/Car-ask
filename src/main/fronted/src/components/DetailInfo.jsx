@@ -25,9 +25,9 @@ const DetailInfo = ({ mainColor }) => {
   const [endTime, endSetTime] = useState("");
 
   const isButtonDisabled = !startTime || !endTime || !questions;
-
+  let place = `리앤김에 궁금하신 점을 작성해주세요\nex) 출고 서비스가 궁금해요. 할인이 궁금해요`;
   const prePageHandler = () => {
-    setSequence("4");
+    setSequence("5");
   };
   const submitHandler = () => {
     console.log("전송");
@@ -37,7 +37,9 @@ const DetailInfo = ({ mainColor }) => {
     setModalSucess(true);
     // setContactTime(`${startTime}~${endTime}`);
   };
-
+  const timeFormat = (item) => {
+    return item >= 10 ? item + ":00" : "0" + item + ":00";
+  };
   return (
     <>
       <TopBar onPrev={prePageHandler}>
@@ -59,18 +61,17 @@ const DetailInfo = ({ mainColor }) => {
           <DateBox>
             <p>연락 가능 시간</p>
             <div>
-              <input
+              <select
                 type="time"
-                value={startTime}
-                onChange={(e) => setStartTime(e.target.value)}
-              />
-              ~
-              <input
-                type="time"
-                value={endTime}
-                onChange={(e) => endSetTime(e.target.value)}
-              />
-              사이
+                value={contactTime}
+                onChange={(e) => setContactTime(e.target.value)}
+              >
+                {new Array(24).fill(0).map((_, idx) => (
+                  <option value={timeFormat(idx + 1)} key={idx + 1}>
+                    {timeFormat(idx + 1)}
+                  </option>
+                ))}
+              </select>
             </div>
           </DateBox>
           <AskBox>
@@ -82,7 +83,7 @@ const DetailInfo = ({ mainColor }) => {
               rows="10"
               value={questions}
               onChange={(e) => setQuestions(e.target.value)}
-              placeholder="리앤김에 궁금하신 점을 작성해주세요"
+              placeholder={place}
             ></textarea>
           </AskBox>
         </InfoBox>
@@ -123,7 +124,7 @@ const DateBox = styled.div`
     align-items: center;
     font-size: 1.3rem;
     gap: 1rem;
-    input {
+    select {
       border: none;
       background-color: #f8f8f8;
       padding: 1rem 2rem;
@@ -150,6 +151,7 @@ const AskBox = styled.div`
     border: none;
     border-radius: 10px;
     font-size: 1.3rem;
+    line-height: 1.8rem;
   }
 `;
 

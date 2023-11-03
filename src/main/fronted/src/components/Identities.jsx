@@ -26,6 +26,7 @@ const Identities = ({ mainColor }) => {
         <p>해당되는 항목을 선택해주세요</p>
         <SelectBox>
           <Label
+            htmlFor="iden1"
             style={{
               background: identity === "개인" ? mainColor : "#f8f8f8",
               color: identity === "개인" ? "#fff" : "#000",
@@ -33,6 +34,7 @@ const Identities = ({ mainColor }) => {
           >
             <input
               type="radio"
+              id="iden1"
               name="identity"
               value="개인"
               checked={identity === "개인"}
@@ -42,6 +44,7 @@ const Identities = ({ mainColor }) => {
             <span>개인</span>
           </Label>
           <Label
+            htmlFor="iden2"
             style={{
               background: identity === "개인사업자" ? mainColor : "#f8f8f8",
               color: identity === "개인사업자" ? "#fff" : "#000",
@@ -49,6 +52,7 @@ const Identities = ({ mainColor }) => {
           >
             <input
               type="radio"
+              id="iden2"
               name="identity"
               value="개인사업자"
               checked={identity === "개인사업자"}
@@ -58,6 +62,7 @@ const Identities = ({ mainColor }) => {
             <span>개인사업자</span>
           </Label>
           <Label
+            htmlFor="iden3"
             style={{
               background: identity === "법인사업자" ? mainColor : "#f8f8f8",
               color: identity === "법인사업자" ? "#fff" : "#000",
@@ -65,6 +70,7 @@ const Identities = ({ mainColor }) => {
           >
             <input
               type="radio"
+              id="iden3"
               name="identity"
               value="법인사업자"
               checked={identity === "법인사업자"}
