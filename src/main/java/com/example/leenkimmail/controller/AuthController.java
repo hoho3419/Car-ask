@@ -1,7 +1,7 @@
 package com.example.leenkimmail.controller;
 
 import com.example.leenkimmail.dto.TokenDto;
-import com.example.leenkimmail.dto.UserRequestDto;
+import com.example.leenkimmail.entity.MemberRequestDto;
 import com.example.leenkimmail.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +16,11 @@ public class AuthController {
   @Autowired
   private final AuthService authService;
   @PostMapping("/signup")
-  public ResponseEntity<String> signup(@RequestBody UserRequestDto userRequestDto) {
-    return ResponseEntity.ok(authService.signup(userRequestDto));
+  public ResponseEntity<String> signup(@RequestBody MemberRequestDto memberRequestDto) {
+    return ResponseEntity.ok(authService.signup(memberRequestDto));
   }
   @PostMapping("/login")
-  public ResponseEntity<TokenDto> login(@RequestBody UserRequestDto userRequestDto){
-    return ResponseEntity.ok(authService.login(userRequestDto));
+  public ResponseEntity<TokenDto> login(@RequestBody MemberRequestDto memberRequestDto){
+    return ResponseEntity.ok(authService.login(memberRequestDto));
   }
 }

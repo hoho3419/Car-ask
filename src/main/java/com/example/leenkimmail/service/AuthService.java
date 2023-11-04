@@ -1,13 +1,12 @@
 package com.example.leenkimmail.service;
 
 import com.example.leenkimmail.dto.TokenDto;
-import com.example.leenkimmail.dto.UserRequestDto;
-import com.example.leenkimmail.entity.User;
+import com.example.leenkimmail.entity.Member;
+import com.example.leenkimmail.entity.MemberRequestDto;
 import com.example.leenkimmail.jwt.TokenProvider;
-import com.example.leenkimmail.repository.UserRepository;
+import com.example.leenkimmail.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -23,7 +22,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +30,7 @@ public class AuthService {
   @Autowired
   private AuthenticationManagerBuilder authenticationManagerBuilder;
   @Autowired
-  private UserRepository userRepository;
+  private MemberRepository memberRepository;
   @Autowired
   private PasswordEncoder passwordEncoder;
   @Autowired
@@ -43,15 +41,15 @@ public class AuthService {
 
 
   @Transactional
-  public String signup(UserRequestDto memberRequestDto) {
+  public String signup(MemberRequestDto memberRequestDto) {
     try {
-      if (userRepository.existsByEmail(memberRequestDto.getEmail())) {
+      if (memberRepository.existsByEmail(memberRequestDto.getEmail())) {
         throw new RuntimeException("이미 가입되어 있는 유저입니다");
       }
 
       if (memberRequestDto.getEmail().equals("admin")) { // 이메일로 체크
-        User member = memberRequestDto.toAdmin(passwordEncoder);
-        userRepository.save(member);
+        Member member = memberRequestDto.toAdmin(passwordEncoder);
+        memberRepository.save(member);
         return "성공";
       } else {
         return "관리자만 회원가입 가능합니다.";
@@ -68,15 +66,16 @@ public class AuthService {
   }
 
   @Transactional
-  public TokenDto login(UserRequestDto userRequestDto) {
+  public TokenDto login(MemberRequestDto memberRequestDto) {
     // 1. Login ID/PW 를 기반으로 AuthenticationToken 생성
-    UsernamePasswordAuthenticationToken authenticationToken = userRequestDto.toAuthentication();
+    UsernamePasswordAuthenticationToken authenticationToken = memberRequestDto.toAuthentication();
+    System.out.println("1");
     // 2. 실제로 검증 (사용자 비밀번호 체크) 이 이루어지는 부분
     Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-
+    System.out.println("2");
     // 3. 인증 정보를 기반으로 JWT 토큰 생성
     TokenDto tokenDto = tokenProvider.generateTokenDto(authentication);
-
+    System.out.println("3");
     return tokenDto;
   }
 
@@ -116,7 +115,7 @@ public class AuthService {
     return newAccessToken;
   }
 
-  public User validateTokenAndGetUser(HttpServletRequest request, UserDetails userDetails) {
+  public Member validateTokenAndGetUser(HttpServletRequest request, UserDetails userDetails) {
     String accessToken = request.getHeader("Authorization");
     if (accessToken == null ) {
       return null;
@@ -126,9 +125,9 @@ public class AuthService {
       throw new IllegalArgumentException("토큰이 만료됐습니다. Refresh Token을 보내주세요.");
     }
     Long Id = Long.valueOf(userDetails.getUsername());
-    return userRepository.findById(Id).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다"));
+    return memberRepository.findById(Id).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다"));
   }
   public boolean isValidEmail(String email) {
-    return userRepository.existsByEmail(email);
+    return memberRepository.existsByEmail(email);
   }
 }

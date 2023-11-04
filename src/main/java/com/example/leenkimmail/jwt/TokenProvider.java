@@ -1,6 +1,5 @@
 package com.example.leenkimmail.jwt;
 
-
 import com.example.leenkimmail.dto.TokenDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -26,8 +25,9 @@ public class TokenProvider {
   private static final String AUTHORITIES_KEY = "auth";
   private static final String BEARER_TYPE = "bearer";
   private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30;
-  private final Key key;
+
   private static final long REFRESH_TOKEN_EXPIRE_TIME = 7L * 24 * 60 * 60 * 1000;
+  private final Key key;
 
   // 주의점: 여기서 @Value는 `springframework.beans.factory.annotation.Value`소속이다! lombok의 @Value와 착각하지 말것!
   public TokenProvider(@Value("${springboot.jwt.secret}") String secretKey) {

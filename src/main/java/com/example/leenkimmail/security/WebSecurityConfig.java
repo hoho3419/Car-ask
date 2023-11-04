@@ -1,9 +1,6 @@
-package com.example.leenkimmail.config;
+package com.example.leenkimmail.security;
 
 import com.example.leenkimmail.jwt.TokenProvider;
-import com.example.leenkimmail.security.JwtAccessDeniedHandler;
-import com.example.leenkimmail.security.JwtAuthenticationEntryPoint;
-import com.example.leenkimmail.security.JwtSecurityConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,11 +10,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Configuration
-@EnableWebSecurity // 기본적인 web 보안을 활성화 하겠다.
-public class SecurityConfig {
+@EnableWebSecurity
+@Component
+public class WebSecurityConfig {
+
   private final TokenProvider tokenProvider;
   private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
   private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
@@ -26,33 +26,27 @@ public class SecurityConfig {
     return new BCryptPasswordEncoder();
   }
 
-
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws  Exception {
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
-//          .httpBasic().disable()
+          .httpBasic().disable()
           .csrf().disable()
           .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-          .and()
 
+          .and()
           .exceptionHandling()
           .authenticationEntryPoint(jwtAuthenticationEntryPoint)
           .accessDeniedHandler(jwtAccessDeniedHandler)
+
           .and()
+          .authorizeRequests()
+          .antMatchers("/auth/**").permitAll()
+          .antMatchers("/email/**").permitAll()
+          .antMatchers("/admin/**").hasRole("ADMIN")
+          .anyRequest().authenticated()
 
-
-          .headers()
-          .frameOptions()
-          .sameOrigin()
-          .and()
-
-          .authorizeRequests() // 인증을 설정하겠다는 뜻이고
-          .antMatchers("/auth/**").permitAll() // 이 경로는 다 허용하고
-          .antMatchers("/qna/**").hasRole("ADMIN")
-          .anyRequest().authenticated()// 그외 나머지는 인증을 해야한다
           .and()
           .apply(new JwtSecurityConfig(tokenProvider));
-
 
     return http.build();
   }

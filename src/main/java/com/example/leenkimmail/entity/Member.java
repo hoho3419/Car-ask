@@ -12,24 +12,22 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Member {
 
   @Id
   @Column(name = "user_id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long userId;
+  private Long id;
 
   private String email;
 
   private String password;
 
-  private boolean activated;
-
   @Enumerated(EnumType.STRING)
   private Authority authority;
 
   @Builder
-  public User( String email, String password, Authority authority) {
+  public Member(String email, String password, Authority authority) {
     this.email = email;
     this.password = password;
     this.authority = authority;
