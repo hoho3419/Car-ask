@@ -8,11 +8,13 @@ const Mail = ({ children }) => {
   const [phoneNumber, setPhoneNumber] = useState(""); // 번호
   const [brand, setBrand] = useState(""); // 브랜드
   const [modelName, setModelName] = useState(""); // 모델명
+  const [leaseMonths, setLeaseMonths] = useState(""); // 리스 개월 수
+  const [deliverDate, setDeliverDate] = useState(""); // 출고 시기
   const [deposit, setDeposit] = useState(""); // 보증금
   const [initialCost, setInitialCost] = useState(""); // 선수금
   const [contactTime, setContactTime] = useState(""); // 연락가능시간
   const [questions, setQuestions] = useState(""); // 건의사항
-  const [modalSucess, setModalSucess] = useState(false);
+  const [modalSucess, setModalSucess] = useState(false); // 전송여부
 
   return (
     <MailInfoContext.Provider
@@ -29,6 +31,10 @@ const Mail = ({ children }) => {
         setBrand,
         modelName,
         setModelName,
+        leaseMonths,
+        setLeaseMonths,
+        deliverDate,
+        setDeliverDate,
         deposit,
         setDeposit,
         initialCost,

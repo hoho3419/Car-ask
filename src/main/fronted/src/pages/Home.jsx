@@ -9,6 +9,7 @@ import UserInfo from "../components/UserInfo";
 import BrandSelect from "../components/BrandSelect";
 import InitialCost from "../components/InitialCost";
 import Sucess from "../components/UI/Sucess";
+import CarCondition from "../components/CarCondition";
 
 const header = css`
   position: fixed;
@@ -30,8 +31,9 @@ function Home() {
         {sequence === "1" && <Identities mainColor={mainColor} />}
         {sequence === "2" && <UserInfo mainColor={mainColor} />}
         {sequence === "3" && <BrandSelect mainColor={mainColor} />}
-        {sequence === "4" && <InitialCost mainColor={mainColor} />}
-        {sequence === "5" && <DetailInfo mainColor={mainColor} />}
+        {sequence === "4" && <CarCondition mainColor={mainColor} />}
+        {sequence === "5" && <InitialCost mainColor={mainColor} />}
+        {sequence === "6" && <DetailInfo mainColor={mainColor} />}
         {modalSucess && <Sucess />}
       </Container>
     </>

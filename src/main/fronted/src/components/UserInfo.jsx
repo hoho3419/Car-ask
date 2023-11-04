@@ -117,7 +117,7 @@ const InfoContainer = styled.div`
   animation: page_slide-down 0.5s ease-out forwards;
 `;
 
-const Left = styled.div`
+export const Left = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -140,6 +140,10 @@ export const Title = styled.div`
     font-family: ONE_Mobile_Regular;
     font-size: 1.5rem;
     color: #3f3f3f;
+  }
+  p {
+    margin-top: 1rem;
+    color: #0c4da2;
   }
 `;
 

@@ -15,7 +15,6 @@ const InitialCost = ({ mainColor }) => {
   const depositFormat = (e) => {
     const depositformat = e.target.value.replace(",", "");
     const deformat = (+depositformat).toLocaleString("ko-KR");
-    console.log(deformat === "NaN" ? "0" : deformat);
     setDeposit(deformat === "NaN" ? "0" : deformat);
   };
   const initCostFormat = (e) => {
@@ -25,19 +24,19 @@ const InitialCost = ({ mainColor }) => {
   };
 
   const prePageHandler = () => {
-    setSequence("3");
+    setSequence("4");
   };
 
   const nextPageHandler = () => {
-    setSequence("5");
+    setSequence("6");
   };
 
   return (
     <>
       <TopBar onPrev={prePageHandler}>
         <Left>
-          <img src="/lee/007.png" alt="아이콘" style={{ width: "6rem" }} />
-          <span>차량 선택</span>
+          <img src="/lee/012.png" alt="아이콘" style={{ width: "5rem" }} />
+          <span>차량 조건</span>
         </Left>
         <img src="/lee/010.png" alt="아이콘" style={{ width: "5rem" }} />
       </TopBar>
@@ -48,6 +47,7 @@ const InitialCost = ({ mainColor }) => {
             초기 비용
           </h2>
           <span>차량 이용시 초기비용을 알려주세요</span>
+          <p>* 무보증 조건일 경우 0을 입력 해주세요.</p>
         </Title>
         <CostContainer>
           <CostBox>

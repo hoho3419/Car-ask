@@ -79,8 +79,8 @@ const BrandSelect = ({ mainColor }) => {
         </Btn>
       </BrandContainer>
       <BottomBar onNext={isButtonDisabled ? null : nextPageHandler}>
-        <img src="/lee/008.png" alt="아이콘" style={{ width: "3.5rem" }} />
-        <span>초기 비용</span>
+        <img src="/lee/012.png" alt="아이콘" style={{ width: "3.5rem" }} />
+        <span>차량 조건</span>
       </BottomBar>
     </>
   );
