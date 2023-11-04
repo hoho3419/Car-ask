@@ -1,17 +1,29 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import { Title } from "./UserInfo";
 import { MailInfoContext } from "../store";
 import { Btn } from "./Identities";
 import TopBar from "./UI/TopBar";
+import { emailSender } from "../api";
+import { useMutation } from "@tanstack/react-query";
+import Spiner from "./UI/Spiner";
 
 const DetailInfo = ({ mainColor }) => {
+  const { mutate, isPending, isError, error } = useMutation({
+    mutationFn: emailSender,
+    onSuccess: () => {
+      setModalSucess(true);
+    },
+  });
+  const place = `리앤김에 궁금하신 점을 작성해주세요\nex) 출고 서비스가 궁금해요. 할인이 궁금해요`;
   const {
     identity,
     name,
     phoneNumber,
     brand,
     modelName,
+    leaseMonths,
+    deliverDate,
     deposit,
     initialCost,
     contactTime,
@@ -21,21 +33,30 @@ const DetailInfo = ({ mainColor }) => {
     setQuestions,
     setModalSucess,
   } = useContext(MailInfoContext);
-  const [startTime, setStartTime] = useState("");
-  const [endTime, endSetTime] = useState("");
 
-  const isButtonDisabled = !startTime || !endTime || !questions;
-  let place = `리앤김에 궁금하신 점을 작성해주세요\nex) 출고 서비스가 궁금해요. 할인이 궁금해요`;
+  const isButtonDisabled = !contactTime || !questions;
   const prePageHandler = () => {
     setSequence("5");
   };
-  const submitHandler = () => {
-    console.log("전송");
-    // const emailData = {
-
-    // }
-    setModalSucess(true);
-    // setContactTime(`${startTime}~${endTime}`);
+  const submitHandler = async () => {
+    try {
+      const emailData = {
+        identity: identity,
+        clientName: name,
+        phoneNumber: phoneNumber,
+        brand: brand,
+        modelName: modelName,
+        leaseMonths: leaseMonths,
+        deliveryDate: deliverDate,
+        deposit: deposit,
+        initialCost: initialCost,
+        contactTime: contactTime,
+        questions: questions,
+      };
+      mutate(emailData);
+    } catch (e) {
+      console.log(e.message);
+    }
   };
   const timeFormat = (item) => {
     return item >= 10 ? item + ":00" : "0" + item + ":00";
@@ -95,6 +116,7 @@ const DetailInfo = ({ mainColor }) => {
           견적 신청
         </Btn>
       </DetailContainer>
+      {isPending && <Spiner />}
     </>
   );
 };
