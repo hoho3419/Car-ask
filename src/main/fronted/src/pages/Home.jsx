@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
-import Mail, { MailInfoContext } from "../store";
+import { MailInfoContext } from "../store";
 import { css } from "@emotion/css";
 import { Global, css as style } from "@emotion/react";
 import DetailInfo from "../components/DetailInfo";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Identities from "../components/Identities";
 import UserInfo from "../components/UserInfo";
 import BrandSelect from "../components/BrandSelect";

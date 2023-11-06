@@ -23,8 +23,8 @@ public class AdminController {
   private final EmailService emailService;
 
   @GetMapping("/read-all")
-  public ResponseEntity<List<EmailResponseDto>> getAllEmail(@RequestBody EmailDto emailDto){
-    List<EmailResponseDto> emails = emailService.getAllEmail();
+  public ResponseEntity<List<EmailResponseDto>> getAllEmail(HttpServletRequest request, @AuthenticationPrincipal UserDetails userDetails){
+    List<EmailResponseDto> emails = emailService.getAllEmail(request,userDetails);
     return new ResponseEntity<>(emails, HttpStatus.OK);
   }
   @PostMapping("/read/{id}")

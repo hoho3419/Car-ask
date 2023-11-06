@@ -33,10 +33,15 @@ public class EmailService {
   private final JavaMailSender javaMailSender;
   @Autowired
   private EmailRepository emailRepository;
+
+  @Autowired
+  private AuthService authService;
   @Value("${spring.mail.nickName}")
   private String id;
 
-  public List<EmailResponseDto> getAllEmail() {
+  public List<EmailResponseDto> getAllEmail(HttpServletRequest request,UserDetails userDetails) {
+    authService.validateTokenAndGetUser(request,userDetails);
+
     List<EmailResponseDto> emailDtos = new ArrayList<>();
     List<Email> emails = emailRepository.findAll();
 
@@ -53,8 +58,10 @@ public class EmailService {
     return emailDtos;
   }
   public EmailDto readEmail(Long id, HttpServletRequest request, UserDetails userDetails){
-    EmailDto emailDto = new EmailDto();
 
+    authService.validateTokenAndGetUser(request,userDetails);
+
+    EmailDto emailDto = new EmailDto();
 
     Email email = emailRepository.findById(id).orElseThrow(() -> new RuntimeException("찾는 게시물이 없습니다"));
     emailDto.setId(email.getId());
@@ -162,7 +169,7 @@ public class EmailService {
     msg += "</p>";
     msg += "<p style=\"font-size: 17px; padding-right: 30px; padding-left: 30px; margin-bottom: 30px;\"> 리스 개월 수 : ";
     msg += leaseMonths;
-    msg += "개월</p>";
+    msg += "</p>";
     msg += "<p style=\"font-size: 17px; padding-right: 30px; padding-left: 30px; margin-bottom: 30px;\"> 출고 시기 : ";
     msg += deliveryDate;
     msg += "</p>";

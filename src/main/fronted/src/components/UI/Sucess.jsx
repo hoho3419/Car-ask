@@ -5,9 +5,9 @@ import { MailInfoContext } from "../../store";
 
 const Sucess = () => {
   const { setModalSucess } = useContext(MailInfoContext);
-
   const clearHandler = () => {
     setModalSucess(false);
+    window.location.href = "https://www.leenkimlease.com/";
   };
 
   return (
