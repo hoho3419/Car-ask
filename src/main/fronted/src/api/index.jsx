@@ -8,18 +8,22 @@ const apiClient = axios.create({
 });
 
 export const emailSender = async (emailData) => {
-  const comName = "이게답솔루션";
-  const adminEmail = "ansrlgur12@eanswer.co.kr";
-  const emailRequest = {
-    comName: comName,
-    adminEmail: adminEmail,
-    contents: "",
-    ...emailData,
-  };
   try {
     console.log(emailData);
-    const data = await apiClient.post("/email", emailRequest);
+    const data = await apiClient.post("/email", emailData);
     console.log(data.data);
+  } catch (e) {
+    console.log(e.message);
+    throw new Error(e.message);
+  }
+};
+
+export const login = async (userData) => {
+  try {
+    const data = await apiClient.post("/auth/login", userData);
+    console.log(data.data);
+    const token = data.data;
+    localStorage.setItem("token", JSON.stringify(token));
   } catch (e) {
     console.log(e.message);
     throw new Error(e.message);
