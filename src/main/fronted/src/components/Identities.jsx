@@ -140,8 +140,6 @@ const Label = styled.label`
   text-align: center;
   outline: solid 1px #f8f8f8;
   cursor: pointer;
-  /* background: #f8f8f8; */
-  /* color: #000; */
   transition: all 0.2s;
   input {
     display: none;
@@ -152,6 +150,22 @@ const Label = styled.label`
   :hover {
     background-color: #0c4da2 !important;
     color: #f8f8f8 !important;
+  }
+
+  @media screen and (max-width: 460px) {
+    padding: 1.7rem 2rem;
+  }
+  @media screen and (max-width: 400px) {
+    padding: 1.7rem 1rem;
+  }
+  @media screen and (max-width: 360px) {
+    padding: 1.7rem 1rem;
+    img {
+      width: 7rem;
+    }
+  }
+  @media screen and (max-width: 340px) {
+    padding: 1.7rem 0.7rem;
   }
 `;
 

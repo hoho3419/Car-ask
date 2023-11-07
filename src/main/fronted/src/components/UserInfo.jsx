@@ -198,7 +198,7 @@ const PrivacyBox = styled.div`
     accent-color: #000;
   }
   label {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     cursor: pointer;
     user-select: none;
   }
@@ -207,7 +207,7 @@ const PrivacyBox = styled.div`
     border: 1px solid #c2b8b8;
     padding: 0.9rem;
     border-radius: 5px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-left: 2rem;
     cursor: pointer;
   }

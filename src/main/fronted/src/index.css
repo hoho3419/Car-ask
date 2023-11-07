@@ -16,6 +16,13 @@ body {
   }
 }
 
+@media screen and (max-width: 600px) {
+  html,
+  body {
+    font-size: 10px;
+  }
+}
+
 a,
 p,
 h1,

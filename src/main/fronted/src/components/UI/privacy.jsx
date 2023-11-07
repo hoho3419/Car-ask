@@ -16,7 +16,7 @@ const body = css`
     margin: 1.2vw 0;
   }
   p {
-    margin: 1vw 0;
+    margin: 1vw 0 3vw 0;
   }
   li {
     margin: 0.5rem 0;

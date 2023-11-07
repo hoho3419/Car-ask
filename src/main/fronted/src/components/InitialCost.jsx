@@ -106,6 +106,9 @@ const CostContainer = styled.div`
   display: flex;
   justify-content: center;
   margin: 2rem 0;
+  @media screen and (max-width: 460px) {
+    flex-wrap: wrap;
+  }
 `;
 
 const CostBox = styled.div`
@@ -119,6 +122,7 @@ const CostBox = styled.div`
   margin: 1rem;
   border-radius: 10px;
   font-size: 1.3rem;
+
   span {
     font-size: 1.3rem;
     color: #565656;
@@ -147,6 +151,12 @@ const CostBox = styled.div`
       box-sizing: border-box;
       vertical-align: bottom;
       color: #565656;
+    }
+  }
+  @media screen and (max-width: 460px) {
+    width: 100%;
+    input {
+      width: 18rem !important;
     }
   }
 `;

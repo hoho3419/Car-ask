@@ -196,7 +196,7 @@ const InputBox = styled.div`
   }
   label {
     font-size: 1.5rem;
-    color: #565656;
+    color: #000;
     margin: 0 1rem;
     font-family: ONE_Mobile_Regular;
   }
