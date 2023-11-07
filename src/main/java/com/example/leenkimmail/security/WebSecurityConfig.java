@@ -40,9 +40,13 @@ public class WebSecurityConfig {
 
           .and()
           .authorizeRequests()
+          .antMatchers("/**/").permitAll()
+          .antMatchers("/privacy/**").permitAll()
           .antMatchers("/auth/**").permitAll()
           .antMatchers("/email/**").permitAll()
           .antMatchers("/admin/**").hasRole("ADMIN")
+          .antMatchers("/", "/static/**").permitAll()
+          .antMatchers("/", "/static/assets/**").permitAll()
           .anyRequest().authenticated()
 
           .and()

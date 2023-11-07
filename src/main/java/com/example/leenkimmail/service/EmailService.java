@@ -83,8 +83,8 @@ public class EmailService {
 
   public Boolean sendSimpleMessage(EmailDto emailDto) throws Exception{
 
-    String adminEmail1 = "hoho3419@naver.com";
-    String adminEmail2 = "hoho3419@eanswer.com";
+    String adminEmail1 = "rlthf3574@naver.com";
+    String adminEmail2 = "leenkimlease@naver.com";
 
     MimeMessage admin1 = createMessage(emailDto,adminEmail1);
     MimeMessage admin2 = createMessage(emailDto,adminEmail2);
