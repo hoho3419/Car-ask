@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Outlet } from "react-router-dom";
 
-const Admin = () => {
+const AdminLayout = () => {
   return (
     <AdminContainer>
       <AdminHeader>
@@ -18,14 +18,13 @@ const Admin = () => {
         <AdminContent>
           <header>문의 관리</header>
           <Outlet />
-          {/* <AdminSection></AdminSection> */}
         </AdminContent>
       </AdminBody>
     </AdminContainer>
   );
 };
 
-export default Admin;
+export default AdminLayout;
 
 const AdminContainer = styled.div`
   height: 100%;
@@ -51,7 +50,7 @@ const AdminHeader = styled.header`
   button {
     padding: 1rem 2rem;
     border-radius: 10px;
-    background-color: #0c4da2;
+    background-color: ${({ theme }) => theme.color.main};
     font-weight: 900;
     color: #fff;
     border: none;
