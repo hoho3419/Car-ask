@@ -62,7 +62,7 @@ const BrandSelect = ({ mainColor }) => {
             <span>모델명</span>
             <input
               type="text"
-              name="model"
+              name="modelName"
               id="model"
               placeholder="상세 모델명을 알려 주세요"
               value={modelName}

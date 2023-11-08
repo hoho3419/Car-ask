@@ -92,7 +92,7 @@ const CarCondition = ({ mainColor }) => {
               <InputBox>
                 <input
                   type="radio"
-                  name="deliverDate"
+                  name="deliveryDate"
                   value={"즉시"}
                   id="option4"
                   onChange={handledeliverChange}
@@ -102,7 +102,7 @@ const CarCondition = ({ mainColor }) => {
               <InputBox>
                 <input
                   type="radio"
-                  name="deliverDate"
+                  name="deliveryDate"
                   value={"한달 이내"}
                   id="option5"
                   onChange={handledeliverChange}
@@ -112,7 +112,7 @@ const CarCondition = ({ mainColor }) => {
               <InputBox>
                 <input
                   type="radio"
-                  name="deliverDate"
+                  name="deliveryDate"
                   value={"관계 없음"}
                   id="option6"
                   onChange={handledeliverChange}

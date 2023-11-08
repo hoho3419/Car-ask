@@ -84,6 +84,7 @@ const DetailInfo = ({ mainColor }) => {
             <div>
               <select
                 type="time"
+                name="contactTime"
                 value={contactTime}
                 onChange={(e) => setContactTime(e.target.value)}
               >

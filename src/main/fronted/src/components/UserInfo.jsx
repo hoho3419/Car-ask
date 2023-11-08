@@ -58,7 +58,7 @@ const UserInfo = ({ mainColor }) => {
             <span>이름</span>
             <input
               type="text"
-              name="name"
+              name="clientName"
               id="name"
               maxLength={20}
               placeholder="이름 입력"
@@ -70,7 +70,7 @@ const UserInfo = ({ mainColor }) => {
             <span>휴대폰 번호</span>
             <input
               type="text"
-              name="phone"
+              name="phoneNumber"
               id="phone"
               placeholder="010-1234-5678"
               maxLength={13}
