@@ -3,10 +3,11 @@ import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import { login } from "../api";
 import { useNavigate } from "react-router-dom";
+import Spiner from "../components/UI/Spiner";
 
 const AdminLogin = () => {
   const nav = useNavigate();
-  const { mutate } = useMutation({
+  const { mutate, isPending, isError, error } = useMutation({
     mutationFn: login,
     onSuccess: () => {
       nav("/adm/email");
@@ -22,19 +23,26 @@ const AdminLogin = () => {
     mutate(data);
   };
 
+  if (isError) {
+    alert("아이디 또는 비밀번호가 맞지 않습니다.");
+  }
+
   return (
-    <LoginContainer>
-      <LoginBox onSubmit={submitHandler}>
-        <img
-          src="/leenkim.png"
-          alt="로고"
-          style={{ width: "10rem", marginTop: "10rem" }}
-        />
-        <input type="text" name="email" id="email" />
-        <input type="text" name="password" id="password" />
-        <button>로그인</button>
-      </LoginBox>
-    </LoginContainer>
+    <>
+      <LoginContainer>
+        <LoginBox onSubmit={submitHandler}>
+          <img
+            src="/leenkim.png"
+            alt="로고"
+            style={{ width: "10rem", marginTop: "10rem" }}
+          />
+          <input type="text" name="email" id="email" />
+          <input type="password" name="password" id="password" />
+          <button>로그인</button>
+        </LoginBox>
+      </LoginContainer>
+      {isPending && <Spiner />}
+    </>
   );
 };
 
