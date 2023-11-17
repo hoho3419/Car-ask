@@ -50,13 +50,43 @@ public class EmailService {
 
       emailDto.setId(email.getId());
       emailDto.setClientName(email.getClientName());
+      emailDto.setIdentity(email.getIdentity());
       emailDto.setBrand(email.getBrand());
+      emailDto.setContactTime(email.getContactTime());
       emailDto.setRegDate(email.getRegDate());
 
       emailDtos.add(emailDto);
     }
     return emailDtos;
   }
+  public List<EmailDto> getAllEmailSave(HttpServletRequest request,UserDetails userDetails) {
+    authService.validateTokenAndGetUser(request,userDetails);
+
+    List<EmailDto> emailDtos = new ArrayList<>();
+    List<Email> emails = emailRepository.findAll();
+
+    for(Email email : emails){
+      EmailDto emailDto = new EmailDto();
+
+      emailDto.setId(email.getId());
+      emailDto.setIdentity(email.getIdentity());
+      emailDto.setClientName(email.getClientName());
+      emailDto.setPhoneNumber(email.getPhoneNumber());
+      emailDto.setBrand(email.getBrand());
+      emailDto.setModelName(email.getModelName());
+      emailDto.setLeaseMonths(email.getLeaseMonths());
+      emailDto.setDeliveryDate(email.getDeliveryDate());
+      emailDto.setDeposit(email.getDeposit());
+      emailDto.setInitialCost(email.getInitialCost());
+      emailDto.setContactTime(email.getContactTime());
+      emailDto.setQuestions(email.getQuestions());
+      emailDto.setRegDate(email.getRegDate());
+
+      emailDtos.add(emailDto);
+    }
+    return emailDtos;
+  }
+
   public EmailDto readEmail(Long id, HttpServletRequest request, UserDetails userDetails){
 
     authService.validateTokenAndGetUser(request,userDetails);
@@ -66,15 +96,15 @@ public class EmailService {
     Email email = emailRepository.findById(id).orElseThrow(() -> new RuntimeException("찾는 게시물이 없습니다"));
     emailDto.setId(email.getId());
     emailDto.setIdentity(email.getIdentity());
-    emailDto.setClientName(emailDto.getClientName());
-    emailDto.setPhoneNumber(emailDto.getPhoneNumber());
+    emailDto.setClientName(email.getClientName());
+    emailDto.setPhoneNumber(email.getPhoneNumber());
     emailDto.setBrand(email.getBrand());
     emailDto.setModelName(email.getModelName());
     emailDto.setLeaseMonths(email.getLeaseMonths());
-    emailDto.setDeliveryDate(emailDto.getDeliveryDate());
+    emailDto.setDeliveryDate(email.getDeliveryDate());
     emailDto.setDeposit(email.getDeposit());
-    emailDto.setInitialCost(emailDto.getInitialCost());
-    emailDto.setContactTime(emailDto.getContactTime());
+    emailDto.setInitialCost(email.getInitialCost());
+    emailDto.setContactTime(email.getContactTime());
     emailDto.setQuestions(email.getQuestions());
     emailDto.setRegDate(email.getRegDate());
 
@@ -84,8 +114,7 @@ public class EmailService {
   public Boolean sendSimpleMessage(EmailDto emailDto) throws Exception{
 
     String adminEmail1 = "rlthf3574@naver.com";
-    String adminEmail2 = "leenkimlease@naver.com";
-
+    String adminEmail2 = "leenkim_lease@naver.com";
     MimeMessage admin1 = createMessage(emailDto,adminEmail1);
     MimeMessage admin2 = createMessage(emailDto,adminEmail2);
 
@@ -182,11 +211,11 @@ public class EmailService {
     msg += "<p style=\"font-size: 17px; padding-right: 30px; padding-left: 30px; margin-bottom: 30px;\"> 연락 가능 시간 : ";
     msg += contactTime;
     msg += "시</p>";
-    msg += "<p style=\"font-size: 17px; padding-right: 30px; padding-left: 30px; margin-bottom: 30px;\"> 궁금 사항 : ";
-    msg += questions;
-    msg += "</p>";
     msg += "<p style=\"font-size: 17px; padding-right: 30px; padding-left: 30px; margin-bottom: 30px;\"> 신청 날짜 : ";
     msg += formattedDate;
+    msg += "</p>";
+    msg += "<p style=\"font-size: 17px; padding-right: 30px; padding-left: 30px; margin-bottom: 30px;\"> 궁금 사항 : ";
+    msg += questions;
     msg += "</p>";
 
     message.setText(msg, "utf-8", "html"); //내용, charset타입, subtype
