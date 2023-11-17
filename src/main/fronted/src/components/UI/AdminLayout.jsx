@@ -1,14 +1,25 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import ExcelDownload from "../admin/ExcelDownload";
 
 const AdminLayout = () => {
+  const nav = useNavigate();
+  const logoutHandler = () => {
+    localStorage.clear();
+    nav("/adm");
+  };
   return (
     <AdminContainer>
       <AdminHeader>
-        <img src="/leenkim.png" alt="로고" />
+        <img
+          src="/leenkim.png"
+          alt="로고"
+          onClick={() => nav("/adm/email")}
+          style={{ cursor: "pointer" }}
+        />
         <div>
-          <button>로그아웃</button>
+          <button onClick={logoutHandler}>로그아웃</button>
         </div>
       </AdminHeader>
       <AdminBody>
@@ -16,7 +27,10 @@ const AdminLayout = () => {
           <span>문의 관리</span>
         </AdminAside>
         <AdminContent>
-          <header>문의 관리</header>
+          <header>
+            <span>문의 관리</span>
+            <ExcelDownload />
+          </header>
           <Outlet />
         </AdminContent>
       </AdminBody>
@@ -48,16 +62,12 @@ const AdminHeader = styled.header`
     background-color: #fff;
   }
   button {
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    background-color: ${({ theme }) => theme.color.main};
-    font-weight: 900;
-    color: #fff;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
     border: none;
-    cursor: pointer;
-    &:hover {
-      color: #000;
-    }
+    border-radius: 5px;
+    color: #fff;
+    background-color: ${({ theme }) => theme.color.main};
   }
 `;
 const AdminBody = styled.div`
@@ -86,12 +96,21 @@ const AdminContent = styled.div`
   flex: 10;
   display: flex;
   flex-direction: column;
+  position: relative;
   header {
+    display: flex;
+    justify-content: space-between;
     padding: 1.2rem 3rem;
     font-size: 1.5rem;
     border-bottom: 1px solid #ddd;
     font-weight: 900;
+    button {
+      font-size: 1.1rem;
+      padding: 0.3rem 0.5rem;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      background-color: #09915c;
+    }
   }
 `;
-
-// const AdminSection = styled.section``;
