@@ -20,4 +20,4 @@ https://leenkimlease-ask.com/
 ![car](https://github.com/hoho3419/Car-ask/assets/106577276/6e2a66a4-8741-4aba-ac06-922428599960)
 
 ## UI Mobile View📌
-![car-mobile](https://github.com/hoho3419/Car-ask/assets/106577276/6df2b086-7adb-4050-b22c-cd2de4401f0b)
+![car-mobile](https://github.com/hoho3419/Car-ask/assets/106577276/2106f5b7-6ffb-4d62-8929-08c9ef732093)
