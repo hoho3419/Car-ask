@@ -1,62 +1,23 @@
-# leenkimmail
-리앤김 메일 - API 명세서
+# Arton 차량 리스 문의 홈페이지
 
+## STACK USED
+* React <br>
+* React-Query <br>
+* Emotion <br>
+* Java
+* Spring boot
+* Mysql
+* AWS
 
-1-2) SignIn
-요청
-URL: /auth/signin
-Method: POST
-Headers:
-Content-Type: application/json
-Body:
-email: string
-password: string
-응답 예시
-status: 200 OK
-body
-{
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwic3ViIjo0LCJpYXQiOjE2NTk5MDQyMTUsImV4cCI6MTY2MDUwOTAxNX0.DyUCCsIGxIl8i_sGFCa3uQcyEDb9dChjbl40h3JWJNc"
-}
+## Function list📌
+* 관리자 로그인,로그아웃
+* 엑셀 다운로드
+  
+## DEMO UR📌
+https://leenkimlease-ask.com/
 
-2-1) SendMail
-요청
-URL: /todos
-Method: POST
-Headers:
-Authorization: Bearer access_token
-Content-Type: application/json
-Body:
-todo: string
-응답 예시
-status: 201 Created
-body
-{
-  "id": 1,
-  "todo": "과제하기",
-  "isCompleted": false,
-  "userId": 1
-}
+## UI Desktop View📌
+![car](https://github.com/hoho3419/Car-ask/assets/106577276/6e2a66a4-8741-4aba-ac06-922428599960)
 
-2-2) getMails
-요청
-URL: /todos
-Method: GET
-Headers:
-Authorization: Bearer access_token
-응답 예시
-status: 200 OK
-body
-[
-  {
-    "id": 1,
-    "todo": "todo2",
-    "isCompleted": false,
-    "userId": 1
-  },
-  {
-    "id": 2,
-    "todo": "todo3",
-    "isCompleted": false,
-    "userId": 1
-  }
-]
+## UI Mobile View📌
+![car-mobile](https://github.com/hoho3419/Car-ask/assets/106577276/6df2b086-7adb-4050-b22c-cd2de4401f0b)
